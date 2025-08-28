@@ -8,6 +8,12 @@ const api = axios.create({
   },
 });
 
+// Debug logging
+console.log('🔧 API Configuration:', {
+  baseURL: import.meta.env.VITE_API_URL || 'https://shootphoto.onrender.com/api',
+  environment: import.meta.env.VITE_NODE_ENV || 'development'
+});
+
 // Request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {

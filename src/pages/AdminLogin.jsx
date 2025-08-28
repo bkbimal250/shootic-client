@@ -16,13 +16,18 @@ const AdminLogin = () => {
   const onSubmit = async (data) => {
     setIsLoading(true)
     
+    console.log('🔍 Login attempt with data:', data)
+    
     try {
+      console.log('📤 Making API request to:', import.meta.env.VITE_API_URL || 'https://shootphoto.onrender.com/api')
       const response = await authAPI.login(data)
+      console.log('✅ Login response:', response.data)
       
       if (response.data.success) {
         const token = response.data.data.token
         
         if (!token) {
+          console.error('❌ No token received')
           toast.error('Login failed - No token received')
           return
         }
@@ -31,9 +36,12 @@ const AdminLogin = () => {
         toast.success('Login successful!')
         navigate('/admin/dashboard')
       } else {
+        console.error('❌ Login failed:', response.data.message)
         toast.error(response.data.message || 'Login failed')
       }
     } catch (error) {
+      console.error('❌ Login error:', error)
+      console.error('❌ Error response:', error.response?.data)
       const errorMessage = error.response?.data?.message || 'Invalid credentials. Please try again.'
       toast.error(errorMessage)
     } finally {
