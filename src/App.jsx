@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import FloatingButton from './components/FloatingButton'
@@ -14,7 +15,8 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <HelmetProvider>
+      <div className="min-h-screen bg-gray-50">
       <Header />
       <AnimatePresence mode="wait">
         <Routes>
@@ -92,7 +94,8 @@ function App() {
       </AnimatePresence>
       <Footer />
       <FloatingButton />
-    </div>
+      </div>
+    </HelmetProvider>
   )
 }
 

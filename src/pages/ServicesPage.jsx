@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
+import SEO from '../components/SEO'
 import { 
   Camera, 
   Heart, 
@@ -152,7 +153,33 @@ const ServicesPage = () => {
   ]
 
   return (
-    <div className="min-h-screen pt-16 sm:pt-20">
+    <>
+      <SEO 
+        title="Photography Services"
+        description="Professional photography services including family portraits, couples & engagement, kids & newborns, solo portraits, and commercial photography. Book your session with Shootic."
+        keywords="family photography, wedding photography, portrait photography, newborn photography, commercial photography, professional photographer, photo studio"
+        url="/services"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Photography Services",
+          "description": "Professional photography services for families, couples, newborns, and commercial needs",
+          "provider": {
+            "@type": "PhotographyBusiness",
+            "name": "Shootic Photography"
+          },
+          "serviceType": [
+            "Family Portraits",
+            "Couples & Engagement",
+            "Kids & Newborns", 
+            "Solo Portraits",
+            "Commercial Photography"
+          ],
+          "areaServed": "United States",
+          "priceRange": "$$"
+        }}
+      />
+      <div className="min-h-screen pt-16 sm:pt-20">
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -323,7 +350,8 @@ const ServicesPage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
 

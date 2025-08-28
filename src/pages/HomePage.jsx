@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import SEO from '../components/SEO'
 import { 
   ArrowRight, 
   Camera, 
@@ -20,6 +21,40 @@ import {
 const HomePage = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [currentFeature, setCurrentFeature] = useState(0)
+
+  // SEO structured data for homepage
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Shootic Photography - Professional Photography Services",
+    "description": "Professional photography services for weddings, portraits, events, and commercial photography. Book your session with Shootic's expert photographers.",
+    "url": "https://shootic.com",
+    "mainEntity": {
+      "@type": "PhotographyBusiness",
+      "name": "Shootic Photography",
+      "description": "Professional photography services for weddings, portraits, events, and commercial photography",
+      "url": "https://shootic.com",
+      "telephone": "+1-555-123-4567",
+      "email": "info@shootic.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "serviceType": [
+        "Wedding Photography",
+        "Portrait Photography",
+        "Event Photography",
+        "Commercial Photography",
+        "Family Photography"
+      ],
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "2500"
+      }
+    }
+  }
 
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 })
   const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.1 })
@@ -120,7 +155,15 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen">
+    <>
+      <SEO 
+        title="Professional Photography Services"
+        description="Professional photography services for weddings, portraits, events, and commercial photography. Book your session with Shootic's expert photographers. High-quality, affordable photography solutions."
+        keywords="photography, wedding photography, portrait photography, event photography, professional photographer, photo studio, photography services, wedding photographer, family portraits, commercial photography"
+        url="/"
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen">
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -486,7 +529,8 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
 
